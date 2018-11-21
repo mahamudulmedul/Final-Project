@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Farmers App</string>
+    <string name="bottom_home_text">Home</string>
+    <string name="bottom_notification_text">Information</string>
+    <string name="bottom_ac_text">Account</string>
+    <string name="description">Description</string>
+    <string name="title_activity_comments">CommentsActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="action_logout_text">Log Out</string>
+    <string name="action_admin_text">Admin</string>
+    <string name="bottom_price_text">Current Price</string>
+
+</resources>
