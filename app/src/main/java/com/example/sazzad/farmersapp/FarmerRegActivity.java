@@ -117,9 +117,47 @@ public class FarmerRegActivity extends AppCompatActivity {
         final String district = editTextDistrict.getText().toString();
         final String type = editTextType.getText().toString();
         final String email = editTextEmail.getText().toString();
-
-
         final String regType=reg_Type.getSelectedItem().toString();
+
+        if(name.isEmpty()){
+            editTextName.setError("Phone number is required");
+            editTextName.requestFocus();
+            return;
+        }
+        if(phoneNo.isEmpty()){
+            editTextPhoneNo.setError("Phone number is required");
+            editTextPhoneNo.requestFocus();
+            return;
+        }
+        if(road.isEmpty()){
+            editTextRoad.setError("Phone number is required");
+            editTextRoad.requestFocus();
+            return;
+        }
+        if(city.isEmpty()){
+            editTextCity.setError("Phone number is required");
+            editTextCity.requestFocus();
+            return;
+        }
+        if(district.isEmpty()){
+            editTextDistrict.setError("Phone number is required");
+            editTextDistrict.requestFocus();
+            return;
+        }
+        if(type.isEmpty()){
+            editTextType.setError("Phone number is required");
+            editTextType.requestFocus();
+            return;
+        }
+        if(email.isEmpty()){
+            editTextEmail.setError("Phone number is required");
+            editTextEmail.requestFocus();
+            return;
+        }
+        if(postImageUri==null){
+            Toast.makeText(this, "please select photo", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
 
         profileProgress.setVisibility(View.VISIBLE);

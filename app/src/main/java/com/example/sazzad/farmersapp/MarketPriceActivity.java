@@ -1,7 +1,15 @@
 package com.example.sazzad.farmersapp;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.sazzad.farmersapp.Model.UpdatePrice;
@@ -11,22 +19,23 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 
-public class MarketPriceActivity extends AppCompatActivity {
+public class MarketPriceActivity extends Fragment {
     TextView txtProductname,txtQuantity,txtPrice,txtPlace,txtDate;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_market_price);
-        txtProductname=findViewById(R.id.txt_productName);
-        txtQuantity=findViewById(R.id.txt_quantity);
-        txtPrice=findViewById(R.id.txt_price);
-        txtPlace=findViewById(R.id.txt_place);
-        txtDate=findViewById(R.id.txt_date);
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.activity_market_price, container, false);
+        txtProductname=view.findViewById(R.id.txt_productName);
+        txtQuantity=view.findViewById(R.id.txt_quantity);
+        txtPrice=view.findViewById(R.id.txt_price);
+        txtPlace=view.findViewById(R.id.txt_place);
+        txtDate=view.findViewById(R.id.txt_date);
 
         load();
-
+      return view;
     }
     public void load(){
 

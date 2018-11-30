@@ -135,6 +135,44 @@ public class NewPostActivity extends AppCompatActivity {
                 final String price=newPostPrice.getText().toString();
                 final String address=newPostAddress.getText().toString();
 
+
+                if(name.isEmpty()){
+                    newPostName.setError("product name is required");
+                    newPostName.requestFocus();
+                    return;
+                }
+                if(quantity.isEmpty()){
+                    newPostQun.setError("please Enter");
+                    newPostQun.requestFocus();
+                    return;
+                }
+                if(price.isEmpty()){
+                    newPostPrice.setError("please Enter");
+                    newPostPrice.requestFocus();
+                    return;
+                }
+                if(phone.isEmpty()){
+                    newPostPhone.setError("please Enter Phone number");
+                    newPostPhone.requestFocus();
+                    return;
+                }
+                if(phone.length() < 11){
+                    newPostPhone.setError("please Enter valid Phone number");
+                    newPostPhone.requestFocus();
+                    return;
+                }
+                if(address.isEmpty()){
+                    newPostAddress.setError("please Enter your address");
+                    newPostAddress.requestFocus();
+                    return;
+                }
+                if(postImageUri== null){
+                    Toast.makeText(NewPostActivity.this, "Please select a photo", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+
                 if (!TextUtils.isEmpty(name) && postImageUri != null) {
 
                     newPostProgress.setVisibility(View.VISIBLE);

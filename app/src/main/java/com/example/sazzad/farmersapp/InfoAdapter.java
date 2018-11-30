@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.sazzad.farmersapp.Model.Users;
 
 public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder> {
@@ -33,8 +35,24 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
     @Override
     public void onBindViewHolder(@NonNull InfoViewHolder infoViewHolder, int i) {
 
-            String name =info_list.get(i).getName();
-        infoViewHolder.txtDesc.setText(name);
+        String name =info_list.get(i).getName();
+        String image=info_list.get(i).getImage_url();
+        String phone =info_list.get(i).getPhoneNo();
+        String road =info_list.get(i).getRoad();
+        String city =info_list.get(i).getCity();
+        String district =info_list.get(i).getDistrict();
+        String email =info_list.get(i).getEmail();
+        String harvagetype=info_list.get(i).getType();
+        String regType =info_list.get(i).getRegType();
+
+        String desc= "Name: "+name+"\nPhone: "+phone+"\nAddress: "+road+", "+city+", "+district+"\nEmail: "+email+"\nHarvage: "+harvagetype+"\n"+ regType ;
+
+
+        infoViewHolder.txtDesc.setText(desc);
+
+        infoViewHolder.setUserImage(image);
+
+
 
     }
 
@@ -53,7 +71,13 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
             super(itemView);
             mView=itemView;
             user_image=mView.findViewById(R.id.info_user_image);
-            txtDesc=mView.findViewById(R.id.txt_info);
+            txtDesc=mView.findViewById(R.id.txtinfo);
+
+
+        }
+        public void setUserImage(String image){
+
+            Glide.with(context).load(image).into(user_image);
         }
     }
 

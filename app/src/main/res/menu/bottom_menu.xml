@@ -12,7 +12,7 @@
         android:title="@string/bottom_notification_text" />
     <item
         android:id="@+id/bottom_action_price"
-        android:icon="@mipmap/baseline_assignment_black_24"
+        android:icon="@drawable/baseline_attach_money_black_24"
         android:title="@string/bottom_price_text" />
 
     <item

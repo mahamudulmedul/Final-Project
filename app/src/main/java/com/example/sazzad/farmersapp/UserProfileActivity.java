@@ -3,10 +3,14 @@ package com.example.sazzad.farmersapp;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,63 +22,39 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class UserProfileActivity extends AppCompatActivity {
+public class UserProfileActivity extends Fragment {
 
     ImageView profileImage;
     TextView txtName, txtAddress, txtPhone, txtEmail;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String current_user_id;
     private FirebaseAuth firebaseAuth;
-
-    private BottomNavigationView mainbottomNav;
+    private Button btnUpdate;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_user_profile);
-        profileImage=findViewById(R.id.user_image);
-        txtName=findViewById(R.id.txt_user_name);
-        txtAddress=findViewById(R.id.txt_address);
-        txtPhone=findViewById(R.id.txt_phone);
-        txtEmail=findViewById(R.id.txt_email);
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.activity_user_profile, container, false);
+        profileImage=view.findViewById(R.id.user_image);
+        txtName=view.findViewById(R.id.txt_user_name);
+        txtAddress=view.findViewById(R.id.txt_address);
+        txtPhone=view.findViewById(R.id.txt_phone);
+        txtEmail=view.findViewById(R.id.txt_email);
         firebaseAuth = FirebaseAuth.getInstance();
         current_user_id = firebaseAuth.getCurrentUser().getUid();
+        btnUpdate=view.findViewById(R.id.btn_update);
         profileUpdate();
 
-        mainbottomNav = findViewById(R.id.mainBottomNav);
-        mainbottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-                switch (item.getItemId()) {
-
-                    case R.id.bottom_action_home:
-                        Intent intent= new Intent(UserProfileActivity.this, PostActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
-
-                        return true;
-
-                    case R.id.bottom_action_account:
-
-
-                        return true;
-
-                    case R.id.bottom_action_notif:
-
-                        Intent mIntent= new Intent(UserProfileActivity.this, InformationActivity.class);
-
-                        startActivity(mIntent);
-                        return true;
-
-                    default:
-                        return false;
-
-
-                }
-
+            public void onClick(View view) {
+                    Intent intent = new Intent(getActivity(), FarmerRegActivity.class);
+                    startActivity(intent);
             }
         });
+
+       return view;
 
     }
 
@@ -112,8 +92,5 @@ public class UserProfileActivity extends AppCompatActivity {
 
     }
 
-    public void btnUpdate(View view) {
-        Intent newPostIntent = new Intent(UserProfileActivity.this, FarmerRegActivity.class);
-        startActivity(newPostIntent);
-    }
+
 }

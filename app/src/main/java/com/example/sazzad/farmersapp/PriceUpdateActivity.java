@@ -42,6 +42,26 @@ public class PriceUpdateActivity extends AppCompatActivity {
         String price=editTextPrice.getText().toString();
         String place=editTextPlace.getText().toString();
         String date= editTextDate.getText().toString();
+        if(productName.isEmpty()){
+            editTextProduct.setError("enter product name");
+            return;
+        }
+        if(quantity.isEmpty()){
+            editTextQuantity.setError("enter Quantity");
+            return;
+        }
+        if(price.isEmpty()){
+            editTextPrice.setError("enter price");
+            return;
+        }
+        if(place.isEmpty()){
+            editTextPlace.setError("enter place");
+            return;
+        }
+        if(date.isEmpty()){
+            editTextDate.setError("enter date");
+            return;
+        }
 
         UpdatePrice updatePrice = new UpdatePrice(productName,quantity,price,place,date);
         db.collection("MarketPrice").add(updatePrice).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

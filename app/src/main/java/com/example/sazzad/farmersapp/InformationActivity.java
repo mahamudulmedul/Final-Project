@@ -1,13 +1,21 @@
 package com.example.sazzad.farmersapp;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,107 +33,119 @@ import java.util.List;
 import com.example.sazzad.farmersapp.Model.Farmer;
 import com.example.sazzad.farmersapp.Model.Users;
 
-public class InformationActivity extends AppCompatActivity {
+public class InformationActivity extends Fragment {
 
-    private TextView txtInfo;
     private EditText mSearch;
-    private Button btnSearch;
+    private Button btnDealer,btnFarmer;
+    private ImageButton btnSearch;
     public Context context;
 
     private RecyclerView mResultList;
     private InfoAdapter infoAdapter;
-    public List<Users> info_list ;
+    public List<Users> info_list;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-   // private CollectionReference dealerRef = db.collection("DealerCollection");
+    // private CollectionReference dealerRef = db.collection("DealerCollection");
     private CollectionReference farmerRef = db.collection("Users");
 
+    public InformationActivity() {
+
+    }
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_information);
-        txtInfo=findViewById(R.id.txt_info);
-        info_list=new ArrayList<>();
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        mResultList =findViewById(R.id.info_list);
-        infoAdapter=new InfoAdapter(info_list);
-        mResultList.setLayoutManager(new LinearLayoutManager(this));
+        View view = inflater.inflate(R.layout.activity_information, container, false);
+        btnSearch=view.findViewById(R.id.imageButton);
+        btnDealer=view.findViewById(R.id.btn_dealer);
+        btnFarmer=view.findViewById(R.id.btn_farmer);
+        mSearch=view.findViewById(R.id.editText_Search);
+
+        info_list = new ArrayList<>();
+
+        mResultList = view.findViewById(R.id.info_list);
+        infoAdapter = new InfoAdapter(info_list);
+        mResultList.setLayoutManager(new LinearLayoutManager(getActivity()));
         mResultList.setHasFixedSize(true);
         mResultList.setAdapter(infoAdapter);
 
+        btnDealer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                info_list.clear();
+                db.collection("Users").whereEqualTo("RegType","ডিলার").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(QuerySnapshot queryDocumentSnapshots, FirebaseFirestoreException e) {
+                        for(DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+                            if(doc.getType() == DocumentChange.Type.ADDED){
+                                Users users=doc.getDocument().toObject(Users.class);
+                                info_list.add(users);
+                                infoAdapter.notifyDataSetChanged();
+
+                            }
+
+                        }
+                    }
+                });
+            }
+        });
+
+        btnFarmer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                info_list.clear();
+                db.collection("Users").whereEqualTo("RegType","কৃষক").addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(QuerySnapshot queryDocumentSnapshots, FirebaseFirestoreException e) {
+                        for(DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+                            if(doc.getType() == DocumentChange.Type.ADDED){
+                                Users users=doc.getDocument().toObject(Users.class);
+                                info_list.add(users);
+                                infoAdapter.notifyDataSetChanged();
+
+                            }
+
+                        }
+                    }
+                });
+            }
+        });
 
 
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                info_list.clear();
+                String city=mSearch.getText().toString();
+                db.collection("Users").whereEqualTo("city",city).addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(QuerySnapshot queryDocumentSnapshots, FirebaseFirestoreException e) {
+                        for(DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
+                            if(doc.getType() == DocumentChange.Type.ADDED){
+                                Users users=doc.getDocument().toObject(Users.class);
+                                info_list.add(users);
+                                infoAdapter.notifyDataSetChanged();
+
+                            }
+
+                        }
+                    }
+                });
+            }
+        });
 
         info();
+        return view;
 
-    }
-
-    public void load(View view) {
-
-        db.collection("Users").whereEqualTo("RegType","কৃষক").get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        String data = "";
-
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            Users info_list = documentSnapshot.toObject(Users.class);
-
-//                            String name = note.getName();
-//                            String phone = note.getPhoneNo();
-//                            String road = note.getRoad();
-//                            String city = note.getCity();
-//                            String district = note.getDistrict();
-//                            String type = note.getType();
-//                            String regType=note.getRegType();
-//                            String image_uri=note.getImage_url();
-//
-//
-//                            data += "Name: " + name
-//                                    + "\nPhone: " + phone + "\nAddress: " + road + ", " + city + ", " + district + "\nType: " + type + "\n\n";
-                        }
+}
 
 
-//                        ImageView user_image=mResultList.findViewById(R.id.blog_user_image);
-//                        //txtInfo=mResultList.findViewById(R.id.txtinfo);
-//                       // Glide.with(context).load().into(user_image);
-//                        txtInfo.setText(data);
-                    }
-                });
-    }
-
-    public void farmerInfo(View view) {
-        farmerRef.get()
-                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                    @Override
-                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                        String data = "";
-
-                        for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
-                            Farmer note = documentSnapshot.toObject(Farmer.class);
-
-                            String name = note.getName();
-                            String phone = note.getPhoneNo();
-                            String road = note.getRoad();
-                            String city = note.getCity();
-                            String district = note.getDistrict();
-                            String type = note.getType();
 
 
-                            data += "Name: " + name
-                                    + "\nPhone: " + phone + "\nAddress: " + road + ", " + city + ", " + district + "\nType: " + type + "\n\n";
-                        }
-
-                       // txtInfo.setText(data);
-                    }
-                });
-
-
-    }
     public void info(){
-        db.collection("Users").whereEqualTo("RegType","কৃষক").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        db.collection("Users").whereEqualTo("RegType","ডিলার").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(QuerySnapshot queryDocumentSnapshots, FirebaseFirestoreException e) {
                 for(DocumentChange doc:queryDocumentSnapshots.getDocumentChanges()){
@@ -139,6 +159,7 @@ public class InformationActivity extends AppCompatActivity {
                 }
             }
         });
+
 
     }
 }

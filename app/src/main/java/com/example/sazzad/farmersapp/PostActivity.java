@@ -1,5 +1,6 @@
 package com.example.sazzad.farmersapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -28,6 +29,9 @@ public class PostActivity extends AppCompatActivity {
     private BottomNavigationView mainbottomNav;
 
     private HomeFragment homeFragment;
+    private InformationActivity informationActivity;
+    private UserProfileActivity userProfileActivity;
+    private MarketPriceActivity marketPriceActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +46,14 @@ public class PostActivity extends AppCompatActivity {
 
             mainbottomNav = findViewById(R.id.mainBottomNav);
             homeFragment = new HomeFragment();
+            informationActivity=new InformationActivity();
+            userProfileActivity =new UserProfileActivity();
+            marketPriceActivity=new MarketPriceActivity();
+
+
             initializeFragment();
             mainbottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @SuppressLint("RestrictedApi")
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
@@ -52,28 +62,23 @@ public class PostActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
 
                         case R.id.bottom_action_home:
-
+                            addPostBtn.setVisibility(View.VISIBLE);
                             replaceFragment(homeFragment, currentFragment);
                             return true;
                         case R.id.bottom_action_price:
-
-                            Intent marketPrice= new Intent(PostActivity.this, MarketPriceActivity.class);
-
-                            startActivity(marketPrice);
+                            addPostBtn.setVisibility(View.INVISIBLE);
+                            replaceFragment(marketPriceActivity, currentFragment);
                             return true;
 
                         case R.id.bottom_action_account:
-
-                            Intent intent= new Intent(PostActivity.this, UserProfileActivity.class);
-
-                            startActivity(intent);
+                            addPostBtn.setVisibility(View.INVISIBLE);
+                            replaceFragment(userProfileActivity, currentFragment);
                             return true;
 
                         case R.id.bottom_action_notif:
+                            addPostBtn.setVisibility(View.INVISIBLE);
+                            replaceFragment(informationActivity, currentFragment);
 
-                            Intent mIntent= new Intent(PostActivity.this, InformationActivity.class);
-
-                            startActivity(mIntent);
                             return true;
 
                         default:
@@ -197,6 +202,12 @@ public class PostActivity extends AppCompatActivity {
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.main_container, homeFragment);
+        fragmentTransaction.add(R.id.main_container, informationActivity);
+        fragmentTransaction.add(R.id.main_container, userProfileActivity);
+        fragmentTransaction.add(R.id.main_container, marketPriceActivity);
+        fragmentTransaction.hide(informationActivity);
+        fragmentTransaction.hide(userProfileActivity);
+        fragmentTransaction.hide(marketPriceActivity);
         fragmentTransaction.commit();
     }
 
@@ -204,32 +215,31 @@ public class PostActivity extends AppCompatActivity {
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         if (fragment == homeFragment) {
+            fragmentTransaction.hide(informationActivity);
+            fragmentTransaction.hide(userProfileActivity);
+            fragmentTransaction.hide(marketPriceActivity);
+        }
+        if (fragment == informationActivity) {
+            fragmentTransaction.hide(homeFragment);
+            fragmentTransaction.hide(userProfileActivity);
+            fragmentTransaction.hide(marketPriceActivity);
+        }
+        if (fragment == userProfileActivity) {
+            fragmentTransaction.hide(homeFragment);
+            fragmentTransaction.hide(informationActivity);
+            fragmentTransaction.hide(marketPriceActivity);
 
-//                   fragmentTransaction.hide(accountFragment);
-            //                  fragmentTransaction.hide(notificationFragment);
 
         }
-//
-//                if(fragment == accountFragment){
-//
-//                    fragmentTransaction.hide(homeFragment);
-//                    fragmentTransaction.hide(notificationFragment);
-//
-//                }
-//
-//                if(fragment == notificationFragment){
-//
-//                    fragmentTransaction.hide(homeFragment);
-//                    fragmentTransaction.hide(accountFragment);
-//
-//                }
+        if (fragment == marketPriceActivity) {
+            fragmentTransaction.hide(homeFragment);
+            fragmentTransaction.hide(userProfileActivity);
+            fragmentTransaction.hide(informationActivity);
+        }
+
+
         fragmentTransaction.show(fragment);
-//
-        //fragmentTransaction.replace(R.id.main_container, fragment);
         fragmentTransaction.commit();
-//
-//
-//
-//
+
     }
 }

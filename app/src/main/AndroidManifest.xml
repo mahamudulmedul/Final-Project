@@ -22,7 +22,6 @@
         </activity>
         <activity android:name=".DealerRegActivity" />
         <activity android:name=".FarmerRegActivity" />
-        <activity android:name=".LoginTypeActivity" />
         <activity
             android:name=".InformationActivity"
             android:theme="@style/AppThemeNoToolbar" />

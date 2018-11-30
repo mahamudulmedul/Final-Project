@@ -118,11 +118,13 @@
 
             <Button
                 android:id="@+id/btnsubmit"
-                android:layout_width="295dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:onClick="addFarmer"
-                android:text="Submit" />
+                android:background="#3177b5"
+                android:textColor="#cdd8fa"
+                android:text="জমা দিন"/>
 
         </LinearLayout>
 
