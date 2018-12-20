@@ -20,7 +20,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DealerRegActivity" />
         <activity android:name=".FarmerRegActivity" />
         <activity
             android:name=".InformationActivity"
@@ -35,10 +34,14 @@
             android:name=".CommentsActivity"
             android:label="@string/title_activity_comments" />
         <activity android:name=".UserProfileActivity" />
-        <activity android:name=".WelcomeActivity" />
         <activity android:name=".MarketPriceActivity" />
         <activity android:name=".PriceUpdateActivity" />
-        <activity android:name=".AdminLogin"></activity>
+        <activity android:name=".AdminLogin" />
+        <activity android:name=".UpdateProfileActivity" />
+        <activity android:name=".CultivationActivity" />
+        <activity android:name=".UpdateCultivation" />
+        <activity android:name=".AdminHomeActivity" />
+        <activity android:name=".CultivationDescActivity"></activity>
     </application>
 
 </manifest>

@@ -1,36 +1,28 @@
 package com.example.sazzad.farmersapp;
 
 import android.content.Context;
-import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.sazzad.farmersapp.Adapter.InfoAdapter;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.sazzad.farmersapp.Model.Farmer;
 import com.example.sazzad.farmersapp.Model.Users;
 
 public class InformationActivity extends Fragment {
@@ -43,10 +35,7 @@ public class InformationActivity extends Fragment {
     private RecyclerView mResultList;
     private InfoAdapter infoAdapter;
     public List<Users> info_list;
-
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    // private CollectionReference dealerRef = db.collection("DealerCollection");
-    private CollectionReference farmerRef = db.collection("Users");
 
     public InformationActivity() {
 

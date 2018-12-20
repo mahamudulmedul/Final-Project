@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CultivationDescActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_margin="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ফসলের নাম: "
+                android:textColor="@android:color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/txt_crop_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ধান"
+                android:textSize="18sp"
+                android:textColor="@android:color/black"/>
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="ভাল ফসল চাষের জায়গা: "
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/cultivation_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ভাল ফসল চাষের জায়গা: "
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="চাষের সময়: "
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/cultivation_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cultivation_time "
+            android:textColor="@android:color/black"/>
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="চাষাবাদ পদ্ধতি: "
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"/>
+        <TextView
+            android:id="@+id/cultivation_process"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cultivation_process "
+            android:layout_marginBottom="10dp"
+            android:textColor="@android:color/black"/>
+
+
+
+    </LinearLayout>
+
+</ScrollView>

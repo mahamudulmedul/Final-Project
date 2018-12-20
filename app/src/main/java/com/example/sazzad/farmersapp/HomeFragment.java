@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
+import com.example.sazzad.farmersapp.Adapter.BlogRecyclerAdapter;
 import com.example.sazzad.farmersapp.Model.BlogPost;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
@@ -53,6 +55,7 @@ public class HomeFragment extends Fragment {
 
         blog_list_view.setAdapter(blogRecyclerAdapter);
 
+
         firebaseFirestore = FirebaseFirestore.getInstance();
         Query orderByQuery=firebaseFirestore.collection("Posts").orderBy("timestamp",Query.Direction.DESCENDING);
         orderByQuery.addSnapshotListener(new EventListener<QuerySnapshot>() {
@@ -63,11 +66,12 @@ public class HomeFragment extends Fragment {
 
 
                         BlogPost blogPost= doc.getDocument().toObject(BlogPost.class);
-                        Log.d("Post", blogPost.getName());
+                        blogPost.setBlogId(doc.getDocument().getId());
                         blog_list.add(blogPost);
                         blogRecyclerAdapter.notifyDataSetChanged();
                     }
                 }
+
             }
         });
 

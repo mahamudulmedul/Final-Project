@@ -10,6 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
+        android:id="@+id/table_price"
         android:background="#f1f1f1">
         <TableRow
             android:layout_marginBottom="2dp">
@@ -54,59 +55,6 @@
                 android:textColor="@color/design_default_color_primary_dark"
                 android:gravity="center"/>
         </TableRow>
-        <TableRow>
-            <TextView
-                android:id="@+id/txt_productName"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="ধান"
-                android:layout_weight="1"
-                android:background="#ffffff"
-                android:textColor="@color/design_default_color_primary_dark"
-                android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/txt_quantity"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="মণ"
-                android:layout_weight="1"
-                android:background="#ffffff"
-                android:textColor="@color/design_default_color_primary_dark"
-                android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/txt_price"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="800"
-                android:layout_weight="1"
-                android:background="#ffffff"
-                android:textColor="@color/design_default_color_primary_dark"
-                android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/txt_place"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="কুমিল্লা"
-                android:layout_weight="1"
-                android:background="#ffffff"
-                android:textColor="@color/design_default_color_primary_dark"
-                android:gravity="center"/>
-
-            <TextView
-                android:id="@+id/txt_date"
-                android:layout_height="wrap_content"
-                android:layout_width="wrap_content"
-                android:text="10/10/2018"
-                android:layout_weight="1"
-                android:background="#ffffff"
-                android:textColor="@color/design_default_color_primary_dark"
-                android:gravity="center"/>
-
-        </TableRow>
-
     </TableLayout>
 
 </FrameLayout>

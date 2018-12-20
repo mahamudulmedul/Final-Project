@@ -68,6 +68,10 @@ public class PriceUpdateActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentReference documentReference) {
                 Toast.makeText(PriceUpdateActivity.this, "add", Toast.LENGTH_SHORT).show();
+                editTextProduct.setText(null);
+                editTextQuantity.setText(null);
+                editTextPrice.setText(null);
+                editTextPlace.setText(null);
 
             }
         });

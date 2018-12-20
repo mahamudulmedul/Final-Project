@@ -55,7 +55,6 @@ public class FarmerRegActivity extends AppCompatActivity {
     private Spinner reg_Type;
 
     private Uri postImageUri = null;
-    private FirebaseFirestore firebaseFirestore;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     @Override
@@ -75,7 +74,6 @@ public class FarmerRegActivity extends AppCompatActivity {
         reg_Type=findViewById(R.id.regType);
 
         storageReference = FirebaseStorage.getInstance().getReference();
-        firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseAuth = FirebaseAuth.getInstance();
 
         String[] reglist={"কৃষক","ডিলার"};
@@ -120,7 +118,7 @@ public class FarmerRegActivity extends AppCompatActivity {
         final String regType=reg_Type.getSelectedItem().toString();
 
         if(name.isEmpty()){
-            editTextName.setError("Phone number is required");
+            editTextName.setError("enter name");
             editTextName.requestFocus();
             return;
         }
@@ -130,27 +128,27 @@ public class FarmerRegActivity extends AppCompatActivity {
             return;
         }
         if(road.isEmpty()){
-            editTextRoad.setError("Phone number is required");
+            editTextRoad.setError("enter road no");
             editTextRoad.requestFocus();
             return;
         }
         if(city.isEmpty()){
-            editTextCity.setError("Phone number is required");
+            editTextCity.setError("city");
             editTextCity.requestFocus();
             return;
         }
         if(district.isEmpty()){
-            editTextDistrict.setError("Phone number is required");
+            editTextDistrict.setError("district");
             editTextDistrict.requestFocus();
             return;
         }
         if(type.isEmpty()){
-            editTextType.setError("Phone number is required");
+            editTextType.setError("harvage");
             editTextType.requestFocus();
             return;
         }
         if(email.isEmpty()){
-            editTextEmail.setError("Phone number is required");
+            editTextEmail.setError("enter email");
             editTextEmail.requestFocus();
             return;
         }
@@ -212,4 +210,5 @@ public class FarmerRegActivity extends AppCompatActivity {
         }
 
     }
+
 }

@@ -23,15 +23,12 @@ public class AdminLogin extends AppCompatActivity {
         String username=editTextUser.getText().toString();
         String pass=editTextPass.getText().toString();
 
-        if(username == "admin" && pass == "admin"){
-            Intent intent= new Intent(AdminLogin.this, PriceUpdateActivity.class);
+        if(username.equals("admin") && pass.equals("admin")){
+            Intent intent= new Intent(AdminLogin.this, AdminHomeActivity.class);
             startActivity(intent);
 
         }else {
             Toast.makeText(this, "wrong", Toast.LENGTH_SHORT).show();
-//            Intent intent= new Intent(AdminLogin.this, PriceUpdateActivity.class);
-//            startActivity(intent);
-
         }
 
 

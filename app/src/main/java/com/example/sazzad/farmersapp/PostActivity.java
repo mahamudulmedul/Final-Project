@@ -13,8 +13,13 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PostActivity extends AppCompatActivity {
@@ -32,6 +37,7 @@ public class PostActivity extends AppCompatActivity {
     private InformationActivity informationActivity;
     private UserProfileActivity userProfileActivity;
     private MarketPriceActivity marketPriceActivity;
+    private CultivationActivity cultivationActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +55,7 @@ public class PostActivity extends AppCompatActivity {
             informationActivity=new InformationActivity();
             userProfileActivity =new UserProfileActivity();
             marketPriceActivity=new MarketPriceActivity();
+            cultivationActivity=new CultivationActivity();
 
 
             initializeFragment();
@@ -73,6 +80,10 @@ public class PostActivity extends AppCompatActivity {
                         case R.id.bottom_action_account:
                             addPostBtn.setVisibility(View.INVISIBLE);
                             replaceFragment(userProfileActivity, currentFragment);
+                            return true;
+                        case R.id.bottom_action_cultivation:
+                            addPostBtn.setVisibility(View.INVISIBLE);
+                            replaceFragment(cultivationActivity, currentFragment);
                             return true;
 
                         case R.id.bottom_action_notif:
@@ -107,47 +118,48 @@ public class PostActivity extends AppCompatActivity {
 
     }
 
-//            @Override
-//            protected void onStart() {
-//                super.onStart();
-//
-//                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-//                if(currentUser == null){
-//
-//                    sendToLogin();
-//
-//                } else {
-//
-//                    current_user_id = mAuth.getCurrentUser().getUid();
-//
-//                    firebaseFirestore.collection("Users").document(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//
-//                            if(task.isSuccessful()){
-//
-//                                if(!task.getResult().exists()){
-//
-////                                    Intent setupIntent = new Intent(PostActivity.this, SetupActivity.class);
-////                                    startActivity(setupIntent);
-////                                    finish();
-//
-//                                }
-//
-//                            } else {
-//
-//                                String errorMessage = task.getException().getMessage();
-//                                Toast.makeText(PostActivity.this, "Error : " + errorMessage, Toast.LENGTH_LONG).show();
-//
-//
-//                            }
-//
-//                        }
-//                    });
-//
-//                }
-//
-//            }
+    //Reg
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser == null){
+
+            sendToLogin();
+
+        } else {
+
+            current_user_id = mAuth.getCurrentUser().getUid();
+
+            firebaseFirestore.collection("Users").document(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                    if(task.isSuccessful()){
+
+                        if(!task.getResult().exists()){
+
+                            Intent setupIntent = new Intent(PostActivity.this, FarmerRegActivity.class);
+                            startActivity(setupIntent);
+                            finish();
+
+                        }
+
+                    } else {
+
+                        String errorMessage = task.getException().getMessage();
+                        Toast.makeText(PostActivity.this, "Error : " + errorMessage, Toast.LENGTH_LONG).show();
+
+
+                    }
+
+                }
+            });
+
+        }
+
+    }
 
 
     @Override
@@ -205,9 +217,11 @@ public class PostActivity extends AppCompatActivity {
         fragmentTransaction.add(R.id.main_container, informationActivity);
         fragmentTransaction.add(R.id.main_container, userProfileActivity);
         fragmentTransaction.add(R.id.main_container, marketPriceActivity);
+        fragmentTransaction.add(R.id.main_container, cultivationActivity);
         fragmentTransaction.hide(informationActivity);
         fragmentTransaction.hide(userProfileActivity);
         fragmentTransaction.hide(marketPriceActivity);
+        fragmentTransaction.hide(cultivationActivity);
         fragmentTransaction.commit();
     }
 
@@ -218,23 +232,32 @@ public class PostActivity extends AppCompatActivity {
             fragmentTransaction.hide(informationActivity);
             fragmentTransaction.hide(userProfileActivity);
             fragmentTransaction.hide(marketPriceActivity);
+            fragmentTransaction.hide(cultivationActivity);
         }
         if (fragment == informationActivity) {
             fragmentTransaction.hide(homeFragment);
             fragmentTransaction.hide(userProfileActivity);
             fragmentTransaction.hide(marketPriceActivity);
+            fragmentTransaction.hide(cultivationActivity);
         }
         if (fragment == userProfileActivity) {
             fragmentTransaction.hide(homeFragment);
             fragmentTransaction.hide(informationActivity);
             fragmentTransaction.hide(marketPriceActivity);
+            fragmentTransaction.hide(cultivationActivity);
 
-
+        }
+        if (fragment == cultivationActivity) {
+            fragmentTransaction.hide(homeFragment);
+            fragmentTransaction.hide(userProfileActivity);
+            fragmentTransaction.hide(informationActivity);
+            fragmentTransaction.hide(marketPriceActivity);
         }
         if (fragment == marketPriceActivity) {
             fragmentTransaction.hide(homeFragment);
             fragmentTransaction.hide(userProfileActivity);
             fragmentTransaction.hide(informationActivity);
+            fragmentTransaction.hide(cultivationActivity);
         }
 
 

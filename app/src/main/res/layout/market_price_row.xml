@@ -1,0 +1,52 @@
+<TableRow xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:id="@+id/txt_productName"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="ধান"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/txt_quantity"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="মণ"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/txt_price"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="800"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/txt_place"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="কুমিল্লা"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/txt_date"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="10/10/2018"
+        android:layout_weight="1"
+        android:background="#ffffff"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:gravity="center"/>
+
+</TableRow>

@@ -14,7 +14,10 @@
         android:id="@+id/bottom_action_price"
         android:icon="@drawable/baseline_attach_money_black_24"
         android:title="@string/bottom_price_text" />
-
+    <item
+        android:id="@+id/bottom_action_cultivation"
+        android:icon="@drawable/baseline_spa_black_24"
+        android:title="@string/bottom_cultivation_text" />
     <item
         android:id="@+id/bottom_action_account"
         android:icon="@drawable/ic_person_black_24dp"

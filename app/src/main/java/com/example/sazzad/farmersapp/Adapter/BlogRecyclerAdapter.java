@@ -1,30 +1,39 @@
-package com.example.sazzad.farmersapp;
+package com.example.sazzad.farmersapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.sazzad.farmersapp.CommentsActivity;
 import com.example.sazzad.farmersapp.Model.BlogPost;
+import com.example.sazzad.farmersapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapter.ViewHolder> {
 
@@ -32,6 +41,7 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
     public List<BlogPost>blog_list;
     private FirebaseFirestore firebaseFirestore;
     private FirebaseAuth firebaseAuth;
+
 
     public BlogRecyclerAdapter(List<BlogPost>blog_list){
 
@@ -41,9 +51,11 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.post_list_item, parent, false);
+
         context=parent.getContext();
 
         firebaseFirestore = FirebaseFirestore.getInstance();
+
 
         return new ViewHolder(view);
     }
@@ -63,7 +75,8 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         holder.setPostImage(image_url);
 
         holder.setIsRecyclable(false);
-        final String blogPostId = blog_list.get(position).BlogPostId;
+        final String blogPostId = blog_list.get(position).getBlogId();
+
 
         String user_id = blog_list.get(position).getUser_id();
 
@@ -110,6 +123,25 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
             }
         });
 
+        firebaseFirestore.collection("Posts/" + blogPostId + "/Comments").addSnapshotListener( new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+
+                if(!documentSnapshots.isEmpty()){
+
+                    int count = documentSnapshots.size();
+
+                    holder.updateCommentsCount(count);
+
+                } else {
+
+                    holder.updateCommentsCount(0);
+
+                }
+
+            }
+        });
+
     }
 
     @Override
@@ -125,6 +157,7 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
         private TextView blogUserName;
         private CircleImageView blogUserImage;
         private ImageView blogCommentBtn;
+        private TextView blogCommentCount;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -158,6 +191,16 @@ public class BlogRecyclerAdapter extends RecyclerView.Adapter<BlogRecyclerAdapte
             placeholderOption.placeholder(R.drawable.profile_placeholder);
 
             Glide.with(context).applyDefaultRequestOptions(placeholderOption).load(image).into(blogUserImage);
+
+        }
+
+        public void updateCommentsCount(int count) {
+            blogCommentCount=mView.findViewById(R.id.blog_comment_count);
+            Log.d(TAG, "updateCommentsCount: " +count);
+
+            blogCommentCount.setText(count+" মন্তব্য");
+
+
 
         }
     }

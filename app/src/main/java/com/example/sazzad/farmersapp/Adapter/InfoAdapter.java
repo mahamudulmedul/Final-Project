@@ -1,4 +1,4 @@
-package com.example.sazzad.farmersapp;
+package com.example.sazzad.farmersapp.Adapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -12,8 +12,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.sazzad.farmersapp.Model.Users;
+import com.example.sazzad.farmersapp.R;
 
 public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder> {
     public Context context;
@@ -45,7 +45,7 @@ public class InfoAdapter extends RecyclerView.Adapter<InfoAdapter.InfoViewHolder
         String harvagetype=info_list.get(i).getType();
         String regType =info_list.get(i).getRegType();
 
-        String desc= "Name: "+name+"\nPhone: "+phone+"\nAddress: "+road+", "+city+", "+district+"\nEmail: "+email+"\nHarvage: "+harvagetype+"\n"+ regType ;
+        String desc= "নাম: "+name+"\nফোন নাম্বার: "+phone+"\nঠিকানা: "+road+", "+city+", "+district+"\nইমেল: "+email+"\nচাষ: "+harvagetype+"\n"+ regType ;
 
 
         infoViewHolder.txtDesc.setText(desc);

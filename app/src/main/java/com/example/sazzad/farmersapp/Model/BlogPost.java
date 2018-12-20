@@ -1,12 +1,19 @@
 package com.example.sazzad.farmersapp.Model;
 
-import com.example.sazzad.farmersapp.BlogPostId;
-
 import java.util.Date;
 
-public class BlogPost extends BlogPostId {
+public class BlogPost {
     public String user_id, image_url, name, phone,quantity,price,address;
     public Date timestamp;
+    private String blogId;
+
+    public String getBlogId() {
+        return blogId;
+    }
+
+    public void setBlogId(String blogId) {
+        this.blogId = blogId;
+    }
 
     public BlogPost() {
     }

@@ -11,80 +11,78 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal">
-
-        <Button
-            android:id="@+id/btn_dealer"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="#3177b5"
-
-            android:text="Dealer "
-            android:textColor="#cdd8fa" />
-
-        <Button
-            android:id="@+id/btn_farmer"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="#3177b5"
-            android:layout_weight="1"
-
-            android:text="Farmer"
-            android:textColor="#cdd8fa" />
-
-    </LinearLayout>
-
-    <android.support.v7.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="5dp"
-        android:layout_margin="5dp"
-        >
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            app:cardCornerRadius="5dp"
+            android:layout_margin="2dp">
 
-            <EditText
-                android:id="@+id/editText_Search"
-                android:layout_width="0dp"
-                android:layout_weight="8"
+            <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_horizontal">
+
+                <Button
+                    android:id="@+id/btn_dealer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:textSize="18dp"
+                    android:text="Dealer "
+                    android:textColor="#cdd8fa" />
+
+                <Button
+                    android:id="@+id/btn_farmer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/round_button"
+                    android:layout_weight="1"
+                    android:text="Farmer"
+                    android:textSize="18dp"
+                    android:textColor="#cdd8fa" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="5dp"
+            android:layout_margin="2dp"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Search"
-                android:textSize="16dp" />
+                android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/imageButton"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:background="@android:color/background_light"
-                android:src="@mipmap/baseline_search_black_18" />
+                <EditText
+                    android:id="@+id/editText_Search"
+                    android:layout_width="0dp"
+                    android:layout_weight="8.5"
+                    android:layout_height="wrap_content"
+                    android:hint="জেলা অনুসন্ধান"
+                    android:textSize="16dp" />
 
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:background="@android:color/background_light"
+                    android:src="@drawable/search" />
+
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
 
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/info_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </ScrollView>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/info_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 

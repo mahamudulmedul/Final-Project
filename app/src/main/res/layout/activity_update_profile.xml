@@ -5,7 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DealerRegActivity">
+    tools:context=".UpdateProfileActivity">
+    <ProgressBar
+        android:id="@+id/profileProgress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/new_post_image" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -14,58 +26,76 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="20dp"
+            android:layout_margin="10dp"
             android:orientation="vertical">
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_Image"
+                android:layout_width="190dp"
+                android:layout_height="170dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/default_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/setupToolbar" />
+
             <EditText
-                android:id="@+id/editText_name"
+                android:id="@+id/edit_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:hint="নাম "
                 android:inputType="" />
 
             <EditText
-                android:id="@+id/editText_phoneno"
+                android:id="@+id/edit_phoneno"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="ফোন নম্বর "
-                android:inputType="" />
+                android:inputType="phone" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text=" ঠিকানা"
+                android:text=" ঠিকানা: "
+                android:textColor="@android:color/background_dark"
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/editText_road"
+                android:id="@+id/edit_road"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
                 android:hint="রাস্তার ঠিকানা"
                 android:inputType="" />
 
             <EditText
-                android:id="@+id/editText_city"
+                android:id="@+id/edit_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
                 android:hint="শহর"
                 android:inputType="" />
 
             <EditText
-                android:id="@+id/editText_district"
+                android:id="@+id/edit_district"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_marginLeft="30dp"
                 android:hint="জেলা"
                 android:inputType="" />
 
             <EditText
-                android:id="@+id/editText_type"
+                android:id="@+id/edit_type"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -73,30 +103,23 @@
                 android:inputType="" />
 
             <EditText
-                android:id="@+id/editText_email"
+                android:id="@+id/edit_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:hint="ইমেল দাও "
                 android:inputType="" />
-
-            <EditText
-                android:id="@+id/editText_password"
+            <Button
+                android:id="@+id/btnUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:hint="পাসওয়ার্ড"
-                android:inputType="textPassword" />
-
-            <Button
-                android:id="@+id/btnsubmit"
-                android:layout_width="295dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:onClick="addDealer"
-                android:text="Submit" />
+                android:background="#3177b5"
+                android:textColor="#cdd8fa"
+                android:text="জমা দিন"/>
 
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

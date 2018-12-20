@@ -11,5 +11,6 @@
     <string name="action_logout_text">Log Out</string>
     <string name="action_admin_text">Admin</string>
     <string name="bottom_price_text">Current Price</string>
+    <string name="bottom_cultivation_text">Cultivation</string>
 
 </resources>
